@@ -10,6 +10,17 @@ namespace lab2
     {
         static void Main(string[] args)
         {
+            DigitalClockDecorator clock = new DigitalClockDecorator(new Clock(16, 48));
+            clock.ShowTime();
+            Console.WriteLine(clock.ToString());
+
+            ClockWithArrowsDecorator clock1 = new ClockWithArrowsDecorator(new Clock(12, 6, 6));
+            clock1.ShowTime();
+            clock1.ShowArrowTurns();
+            Console.WriteLine(clock1.ToString());
+
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
         }
     }
 }
