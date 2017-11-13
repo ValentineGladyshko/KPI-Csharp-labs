@@ -10,7 +10,7 @@ namespace lab2
     {
         static void Main(string[] args)
         {
-            DigitalClockDecorator clock = new DigitalClockDecorator(new Clock(16, 48));
+            DigitalClockDecorator clock = new DigitalClockDecorator(new Clock(12, 6, 6));
             clock.ShowTime();
             Console.WriteLine(clock.ToString());
 

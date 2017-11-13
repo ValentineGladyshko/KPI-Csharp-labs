@@ -42,20 +42,16 @@ namespace lab2
 
     class ClockWithArrowsDecorator : ClockDecorator
     {
-        private double turnHourArrow;
-        private double turnMinuteArrow;
-        private double turnSecondArrow;
-
         public ClockWithArrowsDecorator(IClock clock) : base(clock)
         {
-            turnHourArrow = (((Hours + (double) Minutes / 60 + (double)Seconds / 3600) % 12) * 30);
-            turnMinuteArrow = ((Minutes + (double)Seconds / 60) * 6);
-            turnSecondArrow = (Seconds * 6);
+            TurnHourArrow = (((Hours + (double) Minutes / 60 + (double)Seconds / 3600) % 12) * 30);
+            TurnMinuteArrow = ((Minutes + (double)Seconds / 60) * 6);
+            TurnSecondArrow = (Seconds * 6);
         }
 
-        public double TurnSecondArrow { get => turnSecondArrow; set => turnSecondArrow = value; }
-        public double TurnMinuteArrow { get => turnMinuteArrow; set => turnMinuteArrow = value; }
-        public double TurnHourArrow { get => turnHourArrow; set => turnHourArrow = value; }
+        public double TurnSecondArrow { get; protected set; }
+        public double TurnMinuteArrow { get; protected set; }
+        public double TurnHourArrow { get; protected set; }
 
         public override void ShowTime()
         {
