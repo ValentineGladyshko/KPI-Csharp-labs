@@ -89,7 +89,7 @@
             this.ButtonDivide.Size = new System.Drawing.Size(46, 46);
             this.ButtonDivide.TabIndex = 3;
             this.ButtonDivide.Text = "÷";
-            this.ButtonDivide.UseVisualStyleBackColor = true;
+            this.ButtonDivide.UseVisualStyleBackColor = false;
             this.ButtonDivide.Click += new System.EventHandler(this.ButtonDivide_Click);
             // 
             // label1
@@ -231,6 +231,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.SetStyle(System.Windows.Forms.ControlStyles.SupportsTransparentBackColor, true);
+            this.BackColor = System.Drawing.Color.FromArgb(128, 0, 0, 0);
             this.ClientSize = new System.Drawing.Size(481, 221);
             this.Controls.Add(this.ClearMessageBox);
             this.Controls.Add(this.Complex2Y);
