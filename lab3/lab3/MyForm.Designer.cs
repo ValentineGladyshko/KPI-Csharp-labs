@@ -1,6 +1,6 @@
 ﻿namespace lab3
 {
-    partial class Form1
+    partial class MyForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -46,6 +46,11 @@
             this.Complex2X = new System.Windows.Forms.TextBox();
             this.Complex2Y = new System.Windows.Forms.TextBox();
             this.ClearMessageBox = new System.Windows.Forms.Button();
+            this.buttonLess = new System.Windows.Forms.Button();
+            this.buttonLessEqual = new System.Windows.Forms.Button();
+            this.buttonEqual = new System.Windows.Forms.Button();
+            this.buttonMoreEqual = new System.Windows.Forms.Button();
+            this.buttonMore = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ButtonAdd
@@ -89,7 +94,7 @@
             this.ButtonDivide.Size = new System.Drawing.Size(46, 46);
             this.ButtonDivide.TabIndex = 3;
             this.ButtonDivide.Text = "÷";
-            this.ButtonDivide.UseVisualStyleBackColor = false;
+            this.ButtonDivide.UseVisualStyleBackColor = true;
             this.ButtonDivide.Click += new System.EventHandler(this.ButtonDivide_Click);
             // 
             // label1
@@ -149,7 +154,7 @@
             this.MessageBox.Name = "MessageBox";
             this.MessageBox.ReadOnly = true;
             this.MessageBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.MessageBox.Size = new System.Drawing.Size(227, 103);
+            this.MessageBox.Size = new System.Drawing.Size(227, 155);
             this.MessageBox.TabIndex = 13;
             this.MessageBox.Text = "";
             // 
@@ -157,16 +162,16 @@
             // 
             this.ResultBox.BackColor = System.Drawing.SystemColors.Window;
             this.ResultBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ResultBox.Location = new System.Drawing.Point(320, 142);
+            this.ResultBox.Location = new System.Drawing.Point(320, 194);
             this.ResultBox.Name = "ResultBox";
             this.ResultBox.ReadOnly = true;
-            this.ResultBox.Size = new System.Drawing.Size(98, 20);
+            this.ResultBox.Size = new System.Drawing.Size(150, 20);
             this.ResultBox.TabIndex = 14;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(317, 126);
+            this.label4.Location = new System.Drawing.Point(317, 178);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 13);
             this.label4.TabIndex = 15;
@@ -219,21 +224,79 @@
             // 
             // ClearMessageBox
             // 
-            this.ClearMessageBox.Location = new System.Drawing.Point(320, 168);
+            this.ClearMessageBox.Location = new System.Drawing.Point(320, 220);
             this.ClearMessageBox.Name = "ClearMessageBox";
-            this.ClearMessageBox.Size = new System.Drawing.Size(98, 38);
+            this.ClearMessageBox.Size = new System.Drawing.Size(150, 38);
             this.ClearMessageBox.TabIndex = 21;
             this.ClearMessageBox.Text = "Очистити повідомлення";
             this.ClearMessageBox.UseVisualStyleBackColor = true;
             this.ClearMessageBox.Click += new System.EventHandler(this.ClearMessageBox_Click);
             // 
-            // Form1
+            // buttonLess
+            // 
+            this.buttonLess.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonLess.Location = new System.Drawing.Point(424, 25);
+            this.buttonLess.Name = "buttonLess";
+            this.buttonLess.Size = new System.Drawing.Size(46, 46);
+            this.buttonLess.TabIndex = 22;
+            this.buttonLess.Text = "<";
+            this.buttonLess.UseVisualStyleBackColor = true;
+            this.buttonLess.Click += new System.EventHandler(this.buttonLess_Click);
+            // 
+            // buttonLessEqual
+            // 
+            this.buttonLessEqual.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonLessEqual.Location = new System.Drawing.Point(424, 77);
+            this.buttonLessEqual.Name = "buttonLessEqual";
+            this.buttonLessEqual.Size = new System.Drawing.Size(46, 46);
+            this.buttonLessEqual.TabIndex = 23;
+            this.buttonLessEqual.Text = "<=";
+            this.buttonLessEqual.UseVisualStyleBackColor = true;
+            this.buttonLessEqual.Click += new System.EventHandler(this.buttonLessEqual_Click);
+            // 
+            // buttonEqual
+            // 
+            this.buttonEqual.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonEqual.Location = new System.Drawing.Point(424, 129);
+            this.buttonEqual.Name = "buttonEqual";
+            this.buttonEqual.Size = new System.Drawing.Size(46, 46);
+            this.buttonEqual.TabIndex = 24;
+            this.buttonEqual.Text = "==";
+            this.buttonEqual.UseVisualStyleBackColor = true;
+            this.buttonEqual.Click += new System.EventHandler(this.buttonEqual_Click);
+            // 
+            // buttonMoreEqual
+            // 
+            this.buttonMoreEqual.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonMoreEqual.Location = new System.Drawing.Point(372, 129);
+            this.buttonMoreEqual.Name = "buttonMoreEqual";
+            this.buttonMoreEqual.Size = new System.Drawing.Size(46, 46);
+            this.buttonMoreEqual.TabIndex = 25;
+            this.buttonMoreEqual.Text = ">=";
+            this.buttonMoreEqual.UseVisualStyleBackColor = true;
+            this.buttonMoreEqual.Click += new System.EventHandler(this.buttonMoreEqual_Click);
+            // 
+            // buttonMore
+            // 
+            this.buttonMore.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonMore.Location = new System.Drawing.Point(320, 129);
+            this.buttonMore.Name = "buttonMore";
+            this.buttonMore.Size = new System.Drawing.Size(46, 46);
+            this.buttonMore.TabIndex = 26;
+            this.buttonMore.Text = ">";
+            this.buttonMore.UseVisualStyleBackColor = true;
+            this.buttonMore.Click += new System.EventHandler(this.buttonMore_Click);
+            // 
+            // MyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.SetStyle(System.Windows.Forms.ControlStyles.SupportsTransparentBackColor, true);
-            this.BackColor = System.Drawing.Color.FromArgb(128, 0, 0, 0);
-            this.ClientSize = new System.Drawing.Size(481, 221);
+            this.ClientSize = new System.Drawing.Size(526, 279);
+            this.Controls.Add(this.buttonMore);
+            this.Controls.Add(this.buttonMoreEqual);
+            this.Controls.Add(this.buttonEqual);
+            this.Controls.Add(this.buttonLessEqual);
+            this.Controls.Add(this.buttonLess);
             this.Controls.Add(this.ClearMessageBox);
             this.Controls.Add(this.Complex2Y);
             this.Controls.Add(this.Complex2X);
@@ -252,8 +315,8 @@
             this.Controls.Add(this.ButtonMultiply);
             this.Controls.Add(this.ButtonSubtract);
             this.Controls.Add(this.ButtonAdd);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "MyForm";
+            this.Text = "Калькулятор Комплексних чисел";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -278,6 +341,11 @@
         private System.Windows.Forms.TextBox Complex2X;
         private System.Windows.Forms.TextBox Complex2Y;
         private System.Windows.Forms.Button ClearMessageBox;
+        private System.Windows.Forms.Button buttonLess;
+        private System.Windows.Forms.Button buttonLessEqual;
+        private System.Windows.Forms.Button buttonEqual;
+        private System.Windows.Forms.Button buttonMoreEqual;
+        private System.Windows.Forms.Button buttonMore;
     }
 }
 

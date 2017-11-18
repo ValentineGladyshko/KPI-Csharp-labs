@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace lab3
 {
-    class Context
+    class ContextOperation
     {
         private IOperationStrategy strategy;
 
-        public Context() {}
-        public Context(IOperationStrategy strategy)
+        public ContextOperation() {}
+        public ContextOperation(IOperationStrategy strategy)
         {
             this.strategy = strategy;
         }
@@ -22,6 +22,27 @@ namespace lab3
         }
 
         public Complex Execute(Complex a, Complex b)
+        {
+            return strategy.Execute(a, b);
+        }
+    }
+
+    class ContextCompare
+    {
+        private ICompareStrategy strategy;
+
+        public ContextCompare() { }
+        public ContextCompare(ICompareStrategy strategy)
+        {
+            this.strategy = strategy;
+        }
+
+        public void SetStrategy(ICompareStrategy strategy)
+        {
+            this.strategy = strategy;
+        }
+
+        public bool Execute(Complex a, Complex b)
         {
             return strategy.Execute(a, b);
         }

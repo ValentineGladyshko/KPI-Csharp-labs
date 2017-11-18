@@ -10,22 +10,25 @@ using System.Windows.Forms;
 
 namespace lab3
 {
-    public partial class Form1 : Form
+    public partial class MyForm : Form
     {
         Complex a;
         Complex b;
-        Context context;
+        ContextOperation contextOperation;
+        ContextCompare contextCompare;
 
         private Complex A { get => a; set => a = value; }
         private Complex B { get => b; set => b = value; }
-        private Context Context { get => context; set => context = value; }
+        private ContextOperation ContextOperation { get => contextOperation; set => contextOperation = value; }
+        private ContextCompare ContextCompare { get => contextCompare; set => contextCompare = value; }
 
-        public Form1()
+        public MyForm()
         {
             InitializeComponent();
             A = new Complex();
             B = new Complex();
-            Context = new Context();
+            ContextOperation = new ContextOperation();
+            ContextCompare = new ContextCompare();
         }
 
         private string CheckComplexNumbers()
@@ -84,9 +87,10 @@ namespace lab3
 
             if (result == "")
             {
-                Context.SetStrategy(new OperationAdd());
-                ResultBox.Text = Context.Execute(A, B).ToString();
-                MessageBox.Text += "Виконано додавання: " + ResultBox.Text + "\n";
+                ContextOperation.SetStrategy(new OperationAdd());
+                ResultBox.Text = ContextOperation.Execute(A, B).ToString();
+                MessageBox.Text += "Виконано додавання:\n(" + A.ToString() +
+                    ") + (" + B.ToString() + ") = (" + ResultBox.Text + ")\n";
             }
 
             else
@@ -102,9 +106,10 @@ namespace lab3
 
             if (result == "")
             {
-                Context.SetStrategy(new OperationSubtract());
-                ResultBox.Text = Context.Execute(A, B).ToString();
-                MessageBox.Text += "Виконано віднімання: " + ResultBox.Text + "\n";
+                ContextOperation.SetStrategy(new OperationSubtract());
+                ResultBox.Text = ContextOperation.Execute(A, B).ToString();
+                MessageBox.Text += "Виконано віднімання:\n(" + A.ToString() + 
+                    ") - (" + B.ToString() + ") = (" + ResultBox.Text + ")\n";
             }
 
             else
@@ -120,9 +125,10 @@ namespace lab3
 
             if (result == "")
             {
-                Context.SetStrategy(new OperationMultiply());
-                ResultBox.Text = Context.Execute(A, B).ToString();
-                MessageBox.Text += "Виконано множення: " + ResultBox.Text + "\n";
+                ContextOperation.SetStrategy(new OperationMultiply());
+                ResultBox.Text = ContextOperation.Execute(A, B).ToString();
+                MessageBox.Text += "Виконано множення:\n(" + A.ToString() +
+                    ") * (" + B.ToString() + ") = (" + ResultBox.Text + ")\n";
             }
 
             else
@@ -138,14 +144,110 @@ namespace lab3
 
             if (result == "")
             {
-                Context.SetStrategy(new OperationDivide());
-                ResultBox.Text = Context.Execute(A, B).ToString();
-                MessageBox.Text += "Виконано ділення: " + ResultBox.Text + "\n";
+                ContextOperation.SetStrategy(new OperationDivide());
+                ResultBox.Text = ContextOperation.Execute(A, B).ToString();
+                MessageBox.Text += "Виконано ділення:\n(" + A.ToString() +
+                    ") ÷ (" + B.ToString() + ") = (" + ResultBox.Text + ")\n";
             }
 
             else
             {
                 MessageBox.Text += "Неможливо виконати ділення:\n" + result;
+            }
+        }
+
+        private void buttonLess_Click(object sender, EventArgs e)
+        {
+            string result = "";
+            result = CheckComplexNumbers();
+
+            if (result == "")
+            {
+                ContextCompare.SetStrategy(new CompareLess());
+                ResultBox.Text = ContextCompare.Execute(A, B).ToString();
+                MessageBox.Text += "Виконано порівняння\n(" + A.ToString() +
+                    ") < (" + B.ToString() + ") = (" + ResultBox.Text + ")\n";
+            }
+
+            else
+            {
+                MessageBox.Text += "Неможливо виконати порівняння:\n" + result;
+            }
+        }
+
+        private void buttonEqual_Click(object sender, EventArgs e)
+        {
+            string result = "";
+            result = CheckComplexNumbers();
+
+            if (result == "")
+            {
+                ContextCompare.SetStrategy(new CompareEqual());
+                ResultBox.Text = ContextCompare.Execute(A, B).ToString();
+                MessageBox.Text += "Виконано порівняння\n(" + A.ToString() +
+                    ") == (" + B.ToString() + ") = (" + ResultBox.Text + ")\n";
+            }
+
+            else
+            {
+                MessageBox.Text += "Неможливо виконати порівняння:\n" + result;
+            }
+        }
+
+        private void buttonMore_Click(object sender, EventArgs e)
+        {
+            string result = "";
+            result = CheckComplexNumbers();
+
+            if (result == "")
+            {
+                ContextCompare.SetStrategy(new CompareMore());
+                ResultBox.Text = ContextCompare.Execute(A, B).ToString();
+                MessageBox.Text += "Виконано порівняння\n(" + A.ToString() +
+                    ") > (" + B.ToString() + ") = (" + ResultBox.Text + ")\n";
+            }
+
+            else
+            {
+                MessageBox.Text += "Неможливо виконати порівняння:\n" + result;
+            }
+        }
+
+        private void buttonLessEqual_Click(object sender, EventArgs e)
+        {
+            string result = "";
+            result = CheckComplexNumbers();
+
+            if (result == "")
+            {
+                ContextCompare.SetStrategy(new CompareLessEqual());
+                ResultBox.Text = ContextCompare.Execute(A, B).ToString();
+                MessageBox.Text += "Виконано порівняння\n(" + A.ToString() +
+                    ") <= (" + B.ToString() + ") = (" + ResultBox.Text + ")\n";
+            }
+
+            else
+            {
+                MessageBox.Text += "Неможливо виконати порівняння:\n" + result;
+            }
+        }
+
+        private void buttonMoreEqual_Click(object sender, EventArgs e)
+        {
+            string result = "";
+            result = CheckComplexNumbers();
+
+            if (result == "")
+            {
+                ContextCompare.SetStrategy(new CompareMoreEqual());
+                ResultBox.Text = ContextCompare.Execute(A, B).ToString();
+                MessageBox.Text += "Виконано порівняння\n(" + A.ToString() +
+                    ") >= (" + B.ToString() + ") = (" + ResultBox.Text + ")\n";
+            }
+
+            else
+            {
+                MessageBox.Text += "Неможливо виконати порівняння:\n" + result;
             }
         }
 
