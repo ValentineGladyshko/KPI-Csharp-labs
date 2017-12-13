@@ -187,9 +187,9 @@ namespace lab4
                 }
             }
 
-            // 4 Вивести поставки сгруповані по даті
+            // 4 Вивести поставки згруповані по даті
 
-            Console.WriteLine("\n4 Вивести поставки сгрупованi по датi:\n");
+            Console.WriteLine("\n4 Поставки згрупованi по датi:\n");
 
             var Query4 = from supply in stock
                          group supply by supply.date into table
