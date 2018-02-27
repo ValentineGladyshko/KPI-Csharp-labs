@@ -8,7 +8,12 @@ namespace lab1
 {
     class Square
     {
-        private double Side { get; set; }
+        public double Side { get; set; }
+
+        public Square(double Side)
+        {
+            this.Side = Side;
+        }
 
         public double GetPerimeter()
         {
