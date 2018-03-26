@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace lab1
 {
-    class Square
+    public class Square
     {
         public double Side { get; set; }
 

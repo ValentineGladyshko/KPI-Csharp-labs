@@ -1,0 +1,50 @@
+cd C:\Users\Kappi\Source\Repos\KPI-Csharp-labs\KPI-Semester-6\lab1
+
+csc /out:lib.dll /t:library Circle.cs Square.cs 
+csc /out:Program.exe /t:exe /r:lib.dll Program.cs
+
+csc /out:Program.exe /t:exe /r:Square.dll /r:Circle.dll Program.cs
+ildasm Program.exe
+
+<configuration>
+	<runtime>
+		<assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+			<probing privatePath="lib" />
+		</assemblyBinding>
+	</runtime>
+</configuration>
+
+sn -k lab1.snk
+sn –p lab1.snk lab1.PublicKey
+sn –tp lab1.PublicKey
+
+csc /out:lib3\lib.dll /t:library /keyfile:lab1.snk Circle.cs Square.cs 
+csc /out:Program.exe /t:exe /r:lib3\lib.dll /keyfile:lab1.snk Program.cs
+
+[assembly: AssemblyVersion("1.0.0.0")]
+csc /out:lib3\lib.dll /t:library /keyfile:lab1.snk Circle.cs Square.cs
+csc /out:lib4\lib.dll /t:library /keyfile:lib.snk Circle.cs Square.cs
+[assembly: AssemblyVersion("1.1.0.0")]
+csc /out:lib5\lib.dll /t:library /keyfile:lab1.snk Circle.cs Square.cs
+
+using System.Reflection; 
+[assembly: AssemblyVersion("1.0.0.0")]
+
+gacutil /i Program.exe
+gacutil /l Program
+gacutil /u Program
+gacutil /l Program
+
+gacutil /i lib3\lib.dll
+gacutil /i lib4\lib.dll
+gacutil /i lib5\lib.dll
+gacutil /l lib
+
+[assembly: AssemblyVersion("2.0.0.0")]
+csc /out:Program.exe /t:exe /r:lib3\lib.dll /keyfile:lab1.PublicKey /delaysign Program.cs
+sn -Vr Program.exe
+gacutil /i Program.exe
+gacutil /l Program
+
+sn -R Program.exe lab1.snk
+sn -Vu Program.exe
