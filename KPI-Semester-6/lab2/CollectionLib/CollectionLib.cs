@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace CollectionLib
+namespace Collection.Lib
 {
     public class Node<T>
     {
@@ -25,6 +25,42 @@ namespace CollectionLib
         Node<T> tail;
         int count;
 
+        public class TEventArgs : EventArgs
+        {
+            public T data;
+
+            public TEventArgs(T data)
+            {
+                this.data = data;
+            }
+        };
+
+        public delegate void ClearHandler(object obj, EventArgs args);
+        public delegate void DequeueHandler(object obj, TEventArgs args);
+        public delegate void EnqueueHandler(object obj, TEventArgs args);
+
+        public event ClearHandler DoClear;
+        public event DequeueHandler DoDequeue;
+        public event EnqueueHandler DoEnqueue;
+
+        public void OnDoClear()
+        {
+            EventArgs args = new EventArgs();
+            DoClear?.Invoke(this, args);
+        }
+
+        public void OnDoDequeue(T data)
+        {
+            TEventArgs args = new TEventArgs(data);
+            DoDequeue?.Invoke(this, args);
+        }
+
+        public void OnDoEnqueue(T data)
+        {
+            TEventArgs args = new TEventArgs(data);
+            DoEnqueue?.Invoke(this, args);
+        }
+
         public MyQueue()
         {
             head = null;
@@ -36,10 +72,11 @@ namespace CollectionLib
         {
             if (count == 0)
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("Empty collection.");
             }
 
             T output = head.Data;
+            OnDoDequeue(output);
             head = head.Next;
             count--;
 
@@ -51,7 +88,7 @@ namespace CollectionLib
             Node<T> node = new Node<T>(data);
             Node<T> temp = tail;
             tail = node;
-
+            OnDoEnqueue(data);
             if (count == 0)
             {
                 head = tail;
@@ -68,7 +105,7 @@ namespace CollectionLib
         {
             if (count == 0)
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("Empty collection.");
             }
 
             T output = head.Data;
@@ -108,6 +145,7 @@ namespace CollectionLib
             head = null;
             tail = null;
             count = 0;
+            OnDoClear();
         }
 
         public void CopyTo(T[] array, int arrayIndex)
@@ -124,7 +162,7 @@ namespace CollectionLib
 
             if ((array.Length - arrayIndex) < count)
             {
-                throw new ArgumentException();
+                throw new ArgumentException("Array is small.");
             }
 
             Node<T> temp = head;
@@ -138,9 +176,9 @@ namespace CollectionLib
 
         public int Count { get { return count; } }
 
-        public object SyncRoot => throw new NotImplementedException();
+        public object SyncRoot => throw new NotImplementedException("I don't know async programming.");
 
-        public bool IsSynchronized => throw new NotImplementedException();
+        public bool IsSynchronized => throw new NotImplementedException("I don't know async programming.");
 
         public void CopyTo(Array array, int index)
         {
@@ -156,7 +194,7 @@ namespace CollectionLib
 
             if ((array.Length - index) < count)
             {
-                throw new ArgumentException();
+                throw new ArgumentException("Array is small.");
             }
 
             Node<T> temp = head;
@@ -168,17 +206,12 @@ namespace CollectionLib
             }
         }
 
-        public IEnumerator GetEnumerator()
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            Node<T> temp = head;
-            while (temp != null)
-            {
-                yield return temp.Data;
-                temp = temp.Next;
-            }
+            return GetEnumerator();
         }
 
-        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        public IEnumerator<T> GetEnumerator()
         {
             Node<T> temp = head;
             while (temp != null)
