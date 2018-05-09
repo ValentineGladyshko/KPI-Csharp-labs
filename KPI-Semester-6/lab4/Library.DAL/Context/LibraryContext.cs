@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using Library.DAL.Entities;
@@ -11,7 +13,7 @@ namespace Library.DAL.Context
         {
             Database.SetInitializer<LibraryContext>(new LibraryDbInitializer());
         }
-       
+
         public DbSet<Book> Books { get; set; }
         public DbSet<Author> Authors { get; set; }
         public DbSet<BookAuthor> BookAuthors { get; set; }
@@ -24,7 +26,7 @@ namespace Library.DAL.Context
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
 
-        public class LibraryDbInitializer : DropCreateDatabaseAlways<LibraryContext>
+        public class LibraryDbInitializer : DropCreateDatabaseIfModelChanges<LibraryContext>
         {
             protected override void Seed(LibraryContext db)
             {
@@ -149,17 +151,49 @@ namespace Library.DAL.Context
                     });
                 }
                 db.SaveChanges();
+
                 for (int i = 0; i < Genres.Length; i++)
                 { db.Genres.Add(new Genre { Name = Genres[i] }); }
                 db.SaveChanges();
+
                 n = random.Next(10, 20);
                 for (int i = 0; i < n; i++)
                 {
+                    IEnumerable<Genre> genres = db.Genres;
+                    int genreID = genres.ElementAt(random.Next(0, genres.Count())).GenreID;
                     db.Books.Add(new Book
                     {
                         Name = BookNames[random.Next(0, BookNames.Length)],
-                        GenreID = random.Next(1, Genres.Length + 1),
-                        PublishDate = DateTime.Now
+                        GenreID = genreID,
+                        PublishDate = DateTime.Now,
+                        Quantity = random.Next(2, 151)
+                    });
+                }
+                db.SaveChanges();
+
+                for (int i = 0; i < db.Books.Count(); i++)
+                {
+                    IEnumerable<Author> authors = db.Authors;
+                    int authorID = authors.ElementAt(random.Next(0, authors.Count())).AuthorID;
+                    db.BookAuthors.Add(new BookAuthor
+                    {
+                        BookID = i + 1,
+                        AuthorID = authorID,
+                    });
+                }
+                db.SaveChanges();
+
+                n = random.Next(5, 15);
+                for (int i = 0; i < n; i++)
+                {
+                    IEnumerable<Author> authors = db.Authors;
+                    int authorID = authors.ElementAt(random.Next(0, authors.Count())).AuthorID;
+                    IEnumerable<Book> books = db.Books;
+                    int bookID = books.ElementAt(random.Next(0, books.Count())).BookID;
+                    db.BookAuthors.Add(new BookAuthor
+                    {
+                        BookID = bookID,
+                        AuthorID = authorID,
                     });
                 }
                 db.SaveChanges();
