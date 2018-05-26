@@ -1,0 +1,23 @@
+Mouse
+Keyboard
+Joystick
+Touchpad
+Scanner
+Microphone
+Monitor
+Printer
+Projector
+Speakers
+Headphones
+Video card
+Audio card
+Gamepad
+Optical drive
+Headset
+Floppy drive
+USB controller
+Network interface card
+Hard disk drive
+Solid-state drive
+USB flash drive
+Memory card
