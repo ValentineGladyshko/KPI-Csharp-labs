@@ -47,16 +47,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataModels\AuthorDM.cs" />
-    <Compile Include="DataModels\BookDM.cs" />
-    <Compile Include="DataModels\GenreDM.cs" />
-    <Compile Include="DataModels\UserDM.cs" />
+    <Compile Include="BusinessModels\SupplyProvider.cs" />
+    <Compile Include="BusinessModels\SaleCustomer.cs" />
+    <Compile Include="BusinessModels\SupplyProduct.cs" />
+    <Compile Include="BusinessModels\SaleProduct.cs" />
+    <Compile Include="DataModels\CustomerDM.cs" />
+    <Compile Include="DataModels\ProviderDM.cs" />
+    <Compile Include="DataModels\ProductDM.cs" />
+    <Compile Include="DataModels\CategoryDM.cs" />
+    <Compile Include="DataModels\SupplyDM.cs" />
+    <Compile Include="DataModels\SaleDM.cs" />
     <Compile Include="Exceptions\DataException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\ServiceAuthors.cs" />
-    <Compile Include="Services\ServiceBooks.cs" />
-    <Compile Include="Services\ServiceGenres.cs" />
-    <Compile Include="Services\ServiceUsers.cs" />
+    <Compile Include="Services\ServiceCategories.cs" />
+    <Compile Include="Services\ServiceCustomers.cs" />
+    <Compile Include="Services\ServiceProducts.cs" />
+    <Compile Include="Services\ServiceProviders.cs" />
+    <Compile Include="Services\ServiceSales.cs" />
+    <Compile Include="Services\ServiceSupplies.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
