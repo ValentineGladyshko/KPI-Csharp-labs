@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Storage.Web.Models.ProductView>
+
+@{
+    ViewBag.Title = "Products";
+}
+
+<h2>Products</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-md-2">
+                <label class="control-label">Find by name:</label>
+            </div>
+            <div class="col-md-3">
+                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
+            </div>
+            <div class="col-md-2">
+                <input type="submit" value="Search" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Name", "Index", new { searchString = ViewBag.CurrentFilter, sort = 1, order = ViewBag.NameOrder })
+        </th>
+        <th>
+            @Html.ActionLink("Brand", "Index", new { searchString = ViewBag.CurrentFilter, sort = 2, order = ViewBag.BrandOrder })
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.ActionLink("Price", "Index", new { searchString = ViewBag.CurrentFilter, sort = 3, order = ViewBag.PriceOrder })
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Categories)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Brand)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @foreach (var item1 in item.Categories)
+            {
+                <p>@item1.Name</p>
+            }
+        </td>
+        @{
+            if (item.Categories.Count() != 0)
+            {
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ProductID }) |
+                    @Html.ActionLink("Add Category", "AddCategory", new { id = item.ProductID }) |
+                    @Html.ActionLink("Delete Category", "DeleteCategory", new { id = item.ProductID })
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ProductID }) |
+                    @Html.ActionLink("Add Category", "AddCategory", new { id = item.ProductID })
+                </td>
+            }
+        }
+    </tr>
+    }
+
+</table>

@@ -44,11 +44,6 @@ namespace Storage.BLL.Services
                     UOW.Supplies.Delete(s.SaleID);
                 }
 
-                foreach (ProductCategory pc in UOW.ProductCategories
-                    .Find(pc => pc.ProductID == product.ProductID))
-                {
-                    UOW.ProductCategories.Delete(pc.ProductCategoryID);
-                }
                 UOW.Save();
 
                 UOW.Products.Delete(product.ProductID);
@@ -78,48 +73,11 @@ namespace Storage.BLL.Services
         {
             try
             {
-                return new ProductDM(UOW.Products.Get(ID),
-                    UOW.Categories.Find(c => UOW.ProductCategories
-                    .Find(pc => pc.ProductID == ID && pc.CategoryID == c.CategoryID)
-                    .Count() > 0));
+                return new ProductDM(UOW.Products.Get(ID));
             }
             catch (Exception ex)
             {
                 throw new DataException(ex.Message, "Error in getting Product");
-            }
-        }
-
-        public void AddCategoryToProduct(ProductDM productDM, CategoryDM categoryDM)
-        {
-            try
-            {
-                UOW.ProductCategories.Create(new ProductCategory
-                {
-                    ProductID = productDM.ProductID,
-                    CategoryID = categoryDM.CategoryID
-                });
-
-                UOW.Save();
-            }
-            catch (Exception ex)
-            {
-                throw new DataException(ex.Message, "Error in adding Category to Product");
-            }
-        }
-
-        public void DeleteCategoryFromProduct(ProductDM productDM, CategoryDM categoryDM)
-        {
-            try
-            {
-                UOW.ProductCategories.Delete(UOW.ProductCategories
-                    .Find(pc => pc.ProductID == productDM.ProductID
-                    && pc.CategoryID == categoryDM.CategoryID).First().ProductCategoryID);
-
-                UOW.Save();
-            }
-            catch (Exception ex)
-            {
-                throw new DataException(ex.Message, "Error in deleting Category from Product");
             }
         }
 
@@ -129,36 +87,47 @@ namespace Storage.BLL.Services
 
             foreach (Product p in UOW.Products.GetAll())
             {
-                result.Add(new ProductDM(p,
-                    UOW.Categories.Find(c => UOW.ProductCategories
-                    .Find(pc => pc.ProductID == p.ProductID && pc.CategoryID == c.CategoryID)
-                    .Count() > 0)));
+                result.Add(new ProductDM(p));
             }
 
             return result;
         }
 
-        public IEnumerable<ProductDM> SortByName(IEnumerable<ProductDM> products)
+        public IEnumerable<ProductDM> Sort(IEnumerable<ProductDM> products, int sort, bool order)
         {
-            return products.OrderBy(p => p.Name);
+            if (sort == 1)
+            {
+                if (order)
+                    return products.OrderBy(p => p.Name);
+                else
+                    return products.OrderByDescending(p => p.Name);
+            }
+            else if (sort == 2)
+            {
+                if (order)
+                    return products.OrderBy(p => p.Brand);
+                else
+                    return products.OrderByDescending(p => p.Brand);
+            }
+            else if (sort == 3)
+            {
+                if (order)
+                    return products.OrderBy(p => p.Price);
+                else
+                    return products.OrderByDescending(p => p.Price);
+            }
+            
+            else
+                return products;
         }
 
-        public IEnumerable<ProductDM> SortByBrand(IEnumerable<ProductDM> products)
-        {
-            return products.OrderBy(p => p.Brand);
-        }
-
-        public IEnumerable<ProductDM> SortByPrice(IEnumerable<ProductDM> products)
-        {
-            return products.OrderBy(p => p.Price);
-        }
-
-        public IEnumerable<ProductDM> ProductSearch(IEnumerable<ProductDM> products, string searchString)
+        public IEnumerable<ProductDM> ProductSearch(string searchString)
         {
             searchString = searchString.ToLower();
 
-            return products.Where(p => p.Name.ToLower()
-                .Contains(searchString) || p.Brand.ToLower().Contains(searchString));
+            return GetProducts().Where(p => p.Name.ToLower()
+                .Contains(searchString) || p.Brand.ToLower().Contains(searchString) 
+                || p.Category.Name.ToLower().Contains(searchString));
         }
 
         public void Dispose()

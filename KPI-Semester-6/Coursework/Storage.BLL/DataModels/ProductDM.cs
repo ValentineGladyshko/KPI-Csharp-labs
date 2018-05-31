@@ -12,10 +12,11 @@ namespace Storage.BLL.DataModels
         public int ProductID { get; set; }
         public string Name { get; set; }
         public string Brand { get; set; }
+        public int CategoryID { get; set; }
         public int Quantity { get; set; }
         public decimal Price { get; set; }
 
-        public IEnumerable<CategoryDM> Categories { get; set; }
+        public CategoryDM Category { get; set; }
 
         public ProductDM() { }
 
@@ -24,29 +25,11 @@ namespace Storage.BLL.DataModels
             ProductID = product.ProductID;
             Name = product.Name;
             Brand = product.Brand;
-            Quantity = product.Quantity;
-            Price = product.Price;
-        }
-
-        public ProductDM(Product product, IEnumerable<Category> categories)
-        {
-            ProductID = product.ProductID;
-            Name = product.Name;
-            Brand = product.Brand;
+            CategoryID = product.CategoryID;
             Quantity = product.Quantity;
             Price = product.Price;
 
-            if (categories != null)
-            {
-                List<CategoryDM> productCategories = new List<CategoryDM>();
-
-                foreach (Category c in categories)
-                {
-                    productCategories.Add(new CategoryDM(c));
-                }
-
-                Categories = productCategories;
-            }
+            Category = new CategoryDM(product.Category);
         }
 
         public Product ToProduct()
@@ -56,6 +39,7 @@ namespace Storage.BLL.DataModels
                 ProductID = ProductID,
                 Name = Name,
                 Brand = Brand,
+                CategoryID = CategoryID,
                 Quantity = Quantity,
                 Price = Price
             };
@@ -67,6 +51,7 @@ namespace Storage.BLL.DataModels
             {
                 Name = Name,
                 Brand = Brand,
+                CategoryID = CategoryID,
                 Quantity = Quantity,
                 Price = Price
             };

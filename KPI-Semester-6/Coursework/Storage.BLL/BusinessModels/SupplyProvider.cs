@@ -30,7 +30,8 @@ namespace Storage.BLL.BusinessModels
             result.Add(new SupplyProvider
             {
                 ProviderID = -1,
-                FirstName = "All Providers",
+                FirstName = "All",
+                LastName = "Providers",
                 Quantity = 0,
                 Price = 0
             });

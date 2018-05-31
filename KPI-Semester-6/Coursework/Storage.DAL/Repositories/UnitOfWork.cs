@@ -8,7 +8,6 @@ namespace Storage.DAL.Repositories
         private StorageContext db = new StorageContext();
         private CategoryRepository categoryRepository;
         private CustomerRepository customerRepository;
-        private ProductCategoryRepository productCategoryRepository;
         private ProductRepository productRepository;
         private ProviderRepository providerRepository;
         private SaleRepository saleRepository;
@@ -31,16 +30,6 @@ namespace Storage.DAL.Repositories
                 if (customerRepository == null)
                     customerRepository = new CustomerRepository(db);
                 return customerRepository;
-            }
-        }
-
-        public ProductCategoryRepository ProductCategories
-        {
-            get
-            {
-                if (productCategoryRepository == null)
-                    productCategoryRepository = new ProductCategoryRepository(db);
-                return productCategoryRepository;
             }
         }
 

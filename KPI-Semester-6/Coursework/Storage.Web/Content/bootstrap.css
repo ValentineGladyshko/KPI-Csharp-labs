@@ -1096,9 +1096,9 @@ body {
         left: 0;
         width: 100%;
         height: 100%;
-        background-image: url(/Images/Storage.jpg);
+        background-image: url(/Images/Warehouse.jpg);
         background-repeat: no-repeat;
-        opacity: 0.3;
+        opacity: 0.15;
         z-index: -1;
         background-size: cover;
     }

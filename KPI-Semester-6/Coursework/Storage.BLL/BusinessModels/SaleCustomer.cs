@@ -30,7 +30,8 @@ namespace Storage.BLL.BusinessModels
             result.Add(new SaleCustomer
             {
                 CustomerID = -1,
-                FirstName = "All Customers",
+                FirstName = "All",
+                LastName = "Customers",
                 Quantity = 0,
                 Price = 0
             });

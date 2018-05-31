@@ -86,21 +86,31 @@ namespace Storage.BLL.Services
             return result;
         }
 
-        public IEnumerable<ProviderDM> SortByFirstName(IEnumerable<ProviderDM> providers)
+        public IEnumerable<ProviderDM> Sort(IEnumerable<ProviderDM> providers, int sort, bool order)
         {
-            return providers.OrderBy(p => p.FirstName);
+            if (sort == 1)
+            {
+                if (order)
+                    return providers.OrderBy(p => p.FirstName);
+                else
+                    return providers.OrderByDescending(p => p.FirstName);
+            }
+            else if (sort == 2)
+            {
+                if (order)
+                    return providers.OrderBy(p => p.LastName);
+                else
+                    return providers.OrderByDescending(p => p.LastName);
+            }
+            else
+                return providers;
         }
 
-        public IEnumerable<ProviderDM> SortByLastName(IEnumerable<ProviderDM> providers)
-        {
-            return providers.OrderBy(p => p.LastName);
-        }
-
-        public IEnumerable<ProviderDM> ProviderSearch(IEnumerable<ProviderDM> providers, string searchString)
+        public IEnumerable<ProviderDM> ProviderSearch(string searchString)
         {
             searchString = searchString.ToLower();
 
-            return providers.Where(p => p.FirstName.ToLower()
+            return GetProviders().Where(p => p.FirstName.ToLower()
                 .Contains(searchString) || p.LastName.ToLower().Contains(searchString));
         }
 

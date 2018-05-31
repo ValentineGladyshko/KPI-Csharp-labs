@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Storage.Web.Models.ProviderView>
+
+@{
+    TempData.Keep();
+}
+<table class="table">
+    <tr>
+        <th>
+            @Ajax.ActionLink("FirstName", "GetProviders", new { searchString = "`", sortType = 1 }, new AjaxOptions { UpdateTargetId = "results" })
+        </th>
+        <th>
+            @Ajax.ActionLink("LastName", "GetProviders", new { searchString = "`", sortType = 2 }, new AjaxOptions { UpdateTargetId = "results" })
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProviderID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ProviderID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProviderID })
+            </td>
+        </tr>
+    }
+</table>

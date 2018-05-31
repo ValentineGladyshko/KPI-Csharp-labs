@@ -1,0 +1,32 @@
+hammer
+mallet
+ax
+handsaw
+hacksaw
+level
+screwdriver
+Phillips screwdriver
+wrench
+monkey wrench
+pipe wrench
+chisel
+scraper
+wire stripper
+hand drill
+vise
+pliers
+toolbox
+plane
+electric drill
+drill bit
+circular saw
+power saw
+power sander
+router
+wire
+nail
+washer
+nut
+wood screw
+machine screw
+bolt

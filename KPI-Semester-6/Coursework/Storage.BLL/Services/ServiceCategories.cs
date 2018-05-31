@@ -24,26 +24,27 @@ namespace Storage.BLL.Services
             UOW.Save();
         }
 
-        public void DeleteCategory(CategoryDM categoryDM)
+        public bool DeleteCategory(CategoryDM categoryDM)
         {
-            try
-            {
-                Category category = UOW.Categories.Get(categoryDM.CategoryID);
-
-                foreach (ProductCategory pc in UOW.ProductCategories
-                    .Find(pc => pc.CategoryID == category.CategoryID))
+            
+                try
                 {
-                    UOW.ProductCategories.Delete(pc.ProductCategoryID);
-                }
-                UOW.Save();
+                    Category category = UOW.Categories.Get(categoryDM.CategoryID);
 
-                UOW.Categories.Delete(category.CategoryID);
-                UOW.Save();
-            }
-            catch (Exception ex)
-            {
-                throw new DataException(ex.Message, "Error in deleting Category");
-            }
+                    if (UOW.Products.Find(p => p.CategoryID
+                        == category.CategoryID).Count() == 0)
+                    {
+                        UOW.Categories.Delete(category.CategoryID);
+                        UOW.Save();
+                        return true;
+                    }
+                    return false;
+                }
+                catch (Exception ex)
+                {
+                    throw new DataException(ex.Message, "Error in deleting Category");
+                }
+            
         }
 
         public void UpdateCategory(CategoryDM categoryDM)
@@ -64,11 +65,12 @@ namespace Storage.BLL.Services
         {
             try
             {
-                return new CategoryDM(UOW.Categories.Get(ID));
+                return new CategoryDM(UOW.Categories.Get(ID), 
+                    UOW.Products.Find(p => p.CategoryID == ID));
             }
             catch (Exception ex)
             {
-                throw new DataException(ex.Message, "Error in getting Genre");
+                throw new DataException(ex.Message, "Error in getting Category");
             }
         }
 
@@ -78,7 +80,8 @@ namespace Storage.BLL.Services
 
             foreach (Category c in UOW.Categories.GetAll())
             {
-                result.Add(new CategoryDM(c));
+                result.Add(new CategoryDM(c,
+                    UOW.Products.Find(p => p.CategoryID == c.CategoryID)));
             }
 
             return result;

@@ -1,0 +1,55 @@
+﻿@model Storage.Web.Models.CategoryView
+
+@{
+    ViewBag.Title = "Error";
+}
+
+<h2>Error</h2>
+<hr />
+<div class="text-danger" align="center">
+    <div class="my-p">
+        <h3><strong>Error!</strong> You can not delete Category because Products exist in this Category</h3>
+        <h3><strong>Category: @Html.DisplayFor(model => model.Name)</strong></h3>
+        <div class="text-center">
+            <b>Products:</b>
+        </div>
+        <table class="table">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Brand
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>
+                    Price
+                </th>
+            </tr>
+            @foreach (var item in Model.Products)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Brand)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                </tr>
+            }
+        </table>
+        <br />
+        <h4>
+            @Html.ActionLink("Back to List", "Index")
+        </h4>
+    </div>
+</div>
+<br />

@@ -19,7 +19,7 @@ namespace Storage.DAL.Repositories
 
         public IEnumerable<Product> GetAll()
         {
-            return db.Products;
+            return db.Products.Include(b => b.Category);
         }
 
         public Product Get(int id)
@@ -29,7 +29,7 @@ namespace Storage.DAL.Repositories
 
         public IEnumerable<Product> Find(Func<Product, bool> predicate)
         {
-            return db.Products.Where(predicate).ToList();
+            return db.Products.Include(b => b.Category).Where(predicate).ToList();
         }
 
         public void Create(Product product)

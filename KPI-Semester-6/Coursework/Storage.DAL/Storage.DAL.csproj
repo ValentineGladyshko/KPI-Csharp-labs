@@ -7,8 +7,8 @@
     <ProjectGuid>{EA2C740D-4BFE-4EA4-811B-637D2E00400D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Library.DAL</RootNamespace>
-    <AssemblyName>Library.DAL</AssemblyName>
+    <RootNamespace>Storage.DAL</RootNamespace>
+    <AssemblyName>Storage.DAL</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <PublishUrl>publish\</PublishUrl>
@@ -68,7 +68,6 @@
     <Compile Include="Entities\Provider.cs" />
     <Compile Include="Entities\Sale.cs" />
     <Compile Include="Entities\Supply.cs" />
-    <Compile Include="Entities\ProductCategory.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Context\StorageContext.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
@@ -78,7 +77,6 @@
     <Compile Include="Repositories\SupplyRepository.cs" />
     <Compile Include="Repositories\ProductRepository.cs" />
     <Compile Include="Entities\Customer.cs" />
-    <Compile Include="Repositories\ProductCategoryRepository.cs" />
     <Compile Include="Repositories\CategoryRepository.cs" />
     <Compile Include="Repositories\UnitOfWork.cs" />
     <Compile Include="Repositories\CustomerRepository.cs" />

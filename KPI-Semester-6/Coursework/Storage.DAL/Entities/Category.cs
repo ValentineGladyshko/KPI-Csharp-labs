@@ -9,6 +9,6 @@ namespace Storage.DAL.Entities
         public int CategoryID { get; set; }
         public string Name { get; set; }
 
-        public virtual ICollection<ProductCategory> ProductCategories { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

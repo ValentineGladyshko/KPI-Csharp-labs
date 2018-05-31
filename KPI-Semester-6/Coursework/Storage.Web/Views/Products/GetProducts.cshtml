@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Storage.Web.Models.ProductView>
+
+@{ 
+    TempData.Keep();
+}
+<table class="table">
+    <tr>
+        <th>
+            @Ajax.ActionLink("Name", "GetProducts", new { searchString = "`", sortType = 1 }, new AjaxOptions { UpdateTargetId = "results" })
+        </th>
+        <th>
+            @Ajax.ActionLink("Brand", "GetProducts", new { searchString = "`", sortType = 2 }, new AjaxOptions { UpdateTargetId = "results" })
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th>
+            @Ajax.ActionLink("Price", "GetProducts", new { searchString = "`", sortType = 3 }, new AjaxOptions { UpdateTargetId = "results" })
+        </th>
+        <th>
+            Category
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+            </td>
+        </tr>
+    }
+</table>

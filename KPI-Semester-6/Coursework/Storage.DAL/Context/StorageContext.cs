@@ -19,7 +19,6 @@ namespace Storage.DAL.Context
         public DbSet<Provider> Providers { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<Supply> Supplies { get; set; }
         public DbSet<Sale> Sales { get; set; }
 
@@ -28,15 +27,16 @@ namespace Storage.DAL.Context
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
 
-        public class StorageDbInitializer : DropCreateDatabaseIfModelChanges<StorageContext>
+        public class StorageDbInitializer : DropCreateDatabaseAlways<StorageContext>
         {
             protected override void Seed(StorageContext db)
             {
-                string[] categories = File.ReadAllLines(@".\Strings\categories.txt");
-                string[] firstNames = File.ReadAllLines(@".\Strings\firstnames.txt");
-                string[] lastNames = File.ReadAllLines(@".\Strings\lastnames.txt");
-                string[] brands = File.ReadAllLines(@".\Strings\brands.txt");
-                string[] products = File.ReadAllLines(@".\Strings\products.txt");
+                string path = @"C:\Users\Kappi\Source\Repos\KPI-Csharp-labs\KPI-Semester-6\Coursework\Storage.DAL\Strings";
+                string[] categories = File.ReadAllLines(path + @"\categories.txt");
+                string[] firstNames = File.ReadAllLines(path + @"\firstnames.txt");
+                string[] lastNames = File.ReadAllLines(path + @"\lastnames.txt");
+                string[] brands = File.ReadAllLines(path + @"\brands.txt");
+                string[] products = File.ReadAllLines(path + @"\products.txt");
 
                 Random random = new Random();
 
@@ -69,24 +69,15 @@ namespace Storage.DAL.Context
                 n = random.Next(30, 50);
                 for (int i = 0; i < n; i++)
                 {
+                    IEnumerable<Category> AllCategories = db.Categories;
+                    int categoryID = AllCategories.ElementAt(random.Next(0, AllCategories.Count())).CategoryID;
                     db.Products.Add(new Product
                     {
                         Name = products[random.Next(0, products.Length)],
                         Brand = brands[random.Next(0, brands.Length)],
                         Quantity = random.Next(2, 151),
-                        Price = (random.Next(10, 5000) + (random.Next(0, 100) / 100))
-                    });
-                }
-                db.SaveChanges();
-
-                for (int i = 0; i < db.Products.Count(); i++)
-                {
-                    IEnumerable<Category> AllCategories = db.Categories;
-                    int categoryID = AllCategories.ElementAt(random.Next(0, AllCategories.Count())).CategoryID;
-                    db.ProductCategories.Add(new ProductCategory
-                    {
-                        ProductID = i + 1,
-                        CategoryID = categoryID,
+                        Price = (random.Next(10, 5000) + (random.Next(0, 100) / 100)),
+                        CategoryID = categoryID
                     });
                 }
                 db.SaveChanges();
@@ -103,7 +94,8 @@ namespace Storage.DAL.Context
                         ProductID = product.ProductID,
                         ProviderID = providerID,
                         Quantity = random.Next(20, 100),
-                        Price = (product.Price * random.Next(40, 80) / 100)
+                        Price = (product.Price * random.Next(40, 80) / 100),
+                        SupplyDate = DateTime.Now.AddDays(-random.Next(1, 1000))
                     });
                 }
                 db.SaveChanges();
@@ -119,8 +111,9 @@ namespace Storage.DAL.Context
                     {
                         ProductID = product.ProductID,
                         CustomerID = customerID,
-                        Quantity = random.Next(1, 10)
-                    });
+                        Quantity = random.Next(1, 10),
+                        SaleDate = DateTime.Now.AddDays(-random.Next(1, 1000))
+                });
                 }
                 db.SaveChanges();
             }

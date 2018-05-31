@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Storage.DAL", "Storage.DAL\Storage.DAL.csproj", "{EA2C740D-4BFE-4EA4-811B-637D2E00400D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Storage.BLL", "Storage.BLL\Storage.BLL.csproj", "{33387070-8586-49F8-A5FD-98C4806E9E55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Storage.Web", "Storage.Web\Storage.Web.csproj", "{7CB0126C-DB7B-425C-878C-13150892E390}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EA2C740D-4BFE-4EA4-811B-637D2E00400D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA2C740D-4BFE-4EA4-811B-637D2E00400D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA2C740D-4BFE-4EA4-811B-637D2E00400D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA2C740D-4BFE-4EA4-811B-637D2E00400D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33387070-8586-49F8-A5FD-98C4806E9E55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33387070-8586-49F8-A5FD-98C4806E9E55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33387070-8586-49F8-A5FD-98C4806E9E55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CB0126C-DB7B-425C-878C-13150892E390}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CB0126C-DB7B-425C-878C-13150892E390}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CB0126C-DB7B-425C-878C-13150892E390}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CB0126C-DB7B-425C-878C-13150892E390}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {08E1DACC-39B0-489B-B7A5-810D4F5EBD67}
+	EndGlobalSection
+EndGlobal
