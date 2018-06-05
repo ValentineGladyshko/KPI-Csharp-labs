@@ -69,7 +69,7 @@ namespace Library.Web.Controllers
         public ActionResult Create()
         {
             ProductEdit productEdit = new ProductEdit(serviceCategories.GetCategories()); 
-            return View();
+            return View(productEdit);
         }
 
         // POST: ProductViews/Create

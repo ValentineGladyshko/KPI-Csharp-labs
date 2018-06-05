@@ -27,7 +27,7 @@ namespace Storage.DAL.Context
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
 
-        public class StorageDbInitializer : DropCreateDatabaseAlways<StorageContext>
+        public class StorageDbInitializer : DropCreateDatabaseIfModelChanges<StorageContext>
         {
             protected override void Seed(StorageContext db)
             {

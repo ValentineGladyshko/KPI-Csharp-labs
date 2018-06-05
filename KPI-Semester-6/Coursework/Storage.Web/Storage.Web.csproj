@@ -177,7 +177,6 @@
     <Compile Include="Models\SaleEdit.cs" />
     <Compile Include="Models\SaleProductView.cs" />
     <Compile Include="Models\SaleView.cs" />
-    <Compile Include="Models\StorageWebContext.cs" />
     <Compile Include="Models\SupplyEdit.cs" />
     <Compile Include="Models\SupplyProductView.cs" />
     <Compile Include="Models\SupplyProviderView.cs" />
